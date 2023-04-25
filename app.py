@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, send_file
 import openai
 from pptx import Presentation
+from dotenv import load_dotenv
 from pptx.util import Inches
 import io
+import os
 
-
-openai.api_key = "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"
+openai_api_key = os.environ.get("OPENAI_API_KEY")
+load_dotenv()
 app = Flask(__name__)
 
 @app.route('/')
