@@ -26,7 +26,7 @@ Este proyecto está en constante evolución, ¡como un superhéroe que nunca dej
 
 ## Demostración de funciones y aplicaciones
 
-![Demo GIF](./path/to/your/demo-gif.gif)
+![Demo GIF](https://imgur.com/a/ldaFGdP)
 
 ¡Aquí tienes un adelanto de nuestra fabulosa aplicación! Observa cómo crea un plan de clase y una presentación en PowerPoint con la destreza de un trapecista de circo. 🎪
 
@@ -53,8 +53,8 @@ Agradecemos a todos los justicieros del código que han aportado sus habilidades
 
 ## Personas Desarrolladoras del Proyecto
 
-- [Federico Viola](https://fedeviola.bio.link/): Filósofo, músico e informático. Un verdadero renacentista del siglo XX
+- [Federico Viola](https://fedeviola.bio.link/): Hago filosofía, música y me dedico a la informatica también.
 
 ## Licencia
 
-Este proyecto está licenciado bajo la licencia GNU General Public License v3.0. Consulta el archivo [LICENSE](LICENSE) para obtener más información.
+Este proyecto está licenciado bajo la licencia GNU General Public License v3.0.
