@@ -26,7 +26,7 @@ Este proyecto está en constante evolución, ¡como un superhéroe que nunca dej
 
 ## Demostración de funciones y aplicaciones
 
-![Demo GIF](https://imgur.com/a/ldaFGdP)
+![Demo GIF](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTY0M2M4ZjI3YjQ5NDdiY2I2YWY4MDIxYzQyODQ2MGJlZjMyMDYwMSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/eJrInUzRsoiw7gFxDh/giphy.gif)
 
 ¡Aquí tienes un adelanto de nuestra fabulosa aplicación! Observa cómo crea un plan de clase y una presentación en PowerPoint con la destreza de un trapecista de circo. 🎪
 
