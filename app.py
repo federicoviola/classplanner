@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect, url_for, Response
 import openai
 from pptx import Presentation
 from dotenv import load_dotenv
-from pptx.util import Inches
 import io
 import os
+import tempfile
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
 
 openai_api_key = os.environ.get("OPENAI_API_KEY")
 load_dotenv()
@@ -14,8 +17,8 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-def generate_class_plan(topic, duration):
-    prompt = f"Crear un plan de clase para el tema '{topic}' con una duración de {duration} minutos."
+def generate_class_plan(topic, duration, education_level):
+    prompt = f"Crear una presentacion para una clase de nivel educativo {education_level}. que tenga como objetivo enseñar a los estudiantes sobre el tema '{topic}' con una duración de {duration} minutos."
 
     response = openai.Completion.create(
         engine="text-davinci-003",
@@ -64,25 +67,60 @@ def generate_presentation(topic, plan_text):
 
     return presentation_data
 
+def generate_pdf(topic, plan_text):
+    # Crea un nuevo objeto BytesIO para guardar el PDF
+    pdf_data = io.BytesIO()
+
+    # Crea un nuevo archivo PDF
+    c = canvas.Canvas(pdf_data, pagesize=letter)
+
+    # Agrega el título de la clase
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(inch, 10 * inch, "Clase: " + topic)
+
+    # Agrega el plan de clase
+    c.setFont("Helvetica", 12)
+    y = 9 * inch
+    for point in plan_text.split("\n"):
+        c.drawString(inch, y, point)
+        y -= 0.5 * inch
+
+    # Guarda y cierra el PDF
+    c.save()
+
+    # Rebobina el objeto BytesIO y devuelve los datos
+    pdf_data.seek(0)
+    return pdf_data
+
+from flask import send_file
+
 
 @app.route('/generate', methods=['POST'])
 def generate():
     topic = request.form['topic']
     duration = request.form['duration']
+    file_type = request.form['file_type']
+    education_level = request.form.get('education_level')
 
-    # Genera el plan de clase
-    class_plan = generate_class_plan(topic, duration)
+    # Genera la presentacion para la clase
+    class_plan = generate_class_plan(topic, duration, education_level,)
 
-    # Genera la presentación
-    presentation_data = generate_presentation(topic, class_plan)
+    # Genera la presentación o el PDF, según corresponda
+    if file_type == 'pptx':
+        file_data = generate_presentation(topic, class_plan)
+        file_ext = 'pptx'
+    elif file_type == 'pdf':
+        file_data = generate_pdf(topic, class_plan)
+        file_ext = 'pdf'
+    else:
+        return "Tipo de archivo no válido", 400
 
-    # Envía la presentación como archivo descargable
+    # Envía el archivo generado como archivo descargable
     return send_file(
-        presentation_data,
-        download_name=f"{topic}_presentation.pptx",
-        as_attachment=True,
+    file_data,
+    download_name=f"{topic}_presentation.{file_ext}",
+    as_attachment=True,
     )
-
 
 if __name__ == '__main__':
     app.run(debug=True)

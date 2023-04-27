@@ -1,20 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preparador de Clases</title>
-</head>
-<body>
-    <h1>Preparador de Clases</h1>
-    <form action="/generate" method="POST">
-        <label for="topic">Tema:</label>
-        <input type="text" id="topic" name="topic" required>
-        <br>
-        <label for="duration">Duración (en minutos):</label>
-        <input type="number" id="duration" name="duration" required>
-        <br>
-        <input type="submit" value="Generar">
+    <title>Generador de Presentaciones</title>
+    <style>
+      /* Estilo para el encabezado */
+      header {
+        background-color: #0B5A91;
+        color: #FFFFFF;
+        padding: 10px;
+        text-align: center;
+      }
+
+      /* Estilo para el formulario */
+      form {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      /* Estilo para las etiquetas de los campos de formulario */
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      /* Estilo para los campos de entrada de formulario */
+      input[type="text"],
+      input[type="number"],
+      select {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      /* Estilo para el botón de envío */
+      input[type="submit"] {
+        background-color: #0B5A91;
+        color: #FFFFFF;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+
+      /* Estilo para el botón de envío cuando se coloca el cursor encima */
+      input[type="submit"]:hover {
+        background-color: #07446F;
+      }
+      /* Estilo para el spinner */
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #0B5A91;
+        animation: spin 1s infinite linear;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Generador de Presentaciones</h1>
+    </header>
+
+    <form action="/generate" method="post">
+      <label for="topic">Tema:</label>
+      <input type="text" id="topic" name="topic" required>
+      <label for="duration">Duración (en minutos):</label>
+      <input type="number" id="duration" name="duration" min="1" max="180" required>
+      <label for="file_type">Tipo de archivo:</label>
+      <select id="file_type" name="file_type">
+        <option value="pptx">PowerPoint (.pptx)</option>
+        <option value="pdf">PDF (.pdf)</option>
+      </select>
+      <label for="education_level">Nivel educativo:</label>
+        <select name="education_level" id="education_level">
+        <option value="primaria">Primaria</option>
+        <option value="secundaria">Secundaria</option>
+        <option value="bachillerato">Bachillerato</option>
+        <option value="universidad">Universidad</option>
+        </select>
+      <input type="submit" value="Generar Presentación">
     </form>
-</body>
+
+    <div id="loading-indicator" style="display: none;">
+  <div class="spinner"></div>
+  <p>Generando presentación, por favor espera...</p>
+</div>
+
+    <script>
+      // Muestra el indicador de carga
+      function showLoadingIndicator() {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.display = 'block';
+      }
+
+      // Oculta el indicador de carga
+      function hideLoadingIndicator() {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        loadingIndicator.style.display = 'none';
+      }
+
+      // Captura el evento de envío del formulario
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        // Extrae los valores del formulario
+        const topic = document.getElementById('topic').value;
+        const duration = document.getElementById('duration').value;
+        const file_type = document.getElementById('file_type').value;
+        const education_level = document.getElementById('education_level').value;
+
+        // Crea un objeto FormData con los valores del formulario
+        const formData = new FormData();
+        formData.append('topic', topic);
+        formData.append('duration', duration);
+        formData.append('file_type', file_type);
+        formData.append('education_level', education_level);
+
+        // Llamada AJAX para generar la presentación
+        fetch('/generate', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => {
+            // Oculta el indicador de carga cuando se recibe la respuesta
+            hideLoadingIndicator();
+
+            if (response.ok) {
+              return response.blob();
+            } else {
+              throw new Error('Error al generar la presentación');
+            }
+          })
+          .then((blob) => {
+            // Crea un enlace para descargar el archivo generado
+            const downloadUrl = URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.download = `${topic}_presentation.${file_type}`;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          })
+          .catch((error) => {
+            // Oculta el indicador de carga en caso de error
+            hideLoadingIndicator();
+            console.error(error);
+          });
+
+        // Muestra el indicador de carga antes de iniciar la llamada AJAX
+        showLoadingIndicator();
+      });
+    </script>
+  </body>
 </html>
