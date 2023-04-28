@@ -17,8 +17,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-def generate_class_plan(topic, duration, education_level):
-    prompt = f"Crear una presentacion para una clase de nivel educativo {education_level}. que tenga como objetivo enseñar a los estudiantes sobre el tema '{topic}' con una duración de {duration} minutos."
+def generate_class_plan(topic, duration, education_level, user_keywords):
+    keywords = ", ".join(user_keywords)  # user_keywords debe ser una lista de palabras clave proporcionadas por el usuario
+    prompt = f"Crear una presentacion para una clase de nivel educativo {education_level}. que tenga como objetivo enseñar a los estudiantes sobre el tema '{topic}' con una duración de {duration} minutos. Incluir los siguientes conceptos clave: {keywords}."
 
     response = openai.Completion.create(
         engine="text-davinci-003",
@@ -101,9 +102,12 @@ def generate():
     duration = request.form['duration']
     file_type = request.form['file_type']
     education_level = request.form.get('education_level')
+    keywords_input = request.form['keywords']
+
+    user_keywords = [keyword.strip() for keyword in keywords_input.split(',')]
 
     # Genera la presentacion para la clase
-    class_plan = generate_class_plan(topic, duration, education_level,)
+    class_plan = generate_class_plan(topic, duration, education_level,user_keywords)
 
     # Genera la presentación o el PDF, según corresponda
     if file_type == 'pptx':

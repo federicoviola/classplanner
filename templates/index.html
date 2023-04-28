@@ -92,7 +92,9 @@
         <option value="bachillerato">Bachillerato</option>
         <option value="universidad">Universidad</option>
         </select>
-      <input type="submit" value="Generar Presentación">
+        <label for="keywords">Palabras clave (separadas por comas):</label>
+        <input type="text" id="keywords" name="keywords" placeholder="Ejemplo: concepto1, concepto2, concepto3">
+        <input type="submit" value="Generar Presentación">
     </form>
 
     <div id="loading-indicator" style="display: none;">
@@ -123,6 +125,7 @@
         const duration = document.getElementById('duration').value;
         const file_type = document.getElementById('file_type').value;
         const education_level = document.getElementById('education_level').value;
+        const keywords = document.getElementById('keywords').value;
 
         // Crea un objeto FormData con los valores del formulario
         const formData = new FormData();
@@ -130,6 +133,7 @@
         formData.append('duration', duration);
         formData.append('file_type', file_type);
         formData.append('education_level', education_level);
+        formData.append('keywords', keywords);
 
         // Llamada AJAX para generar la presentación
         fetch('/generate', {
