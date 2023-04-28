@@ -52,7 +52,8 @@ Todavía nadie. Si deseas unirte a nuestra liga de superhéroes, no dudes en hac
 ## Personas Desarrolladoras del Proyecto
 
 - [Federico Viola](https://fedeviola.bio.link/): Hago filosofía, música y me dedico a la informatica también.
-![Twitter URL](https://img.shields.io/twitter/follow/federicoviola?style=social)
+[![Twitter Follow](https://img.shields.io/twitter/follow/federicoviola?style=social)](https://twitter.com/federicoviola)
+
 ## Licencia
 
 Este proyecto está licenciado bajo la licencia GNU General Public License v3.0.
