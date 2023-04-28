@@ -1,7 +1,5 @@
 # 🚀 Class Planner App: ¡Diversión y Planificación! 🚀
 
-![Class Planner App](./path/to/your/cover-image.png)
-
 ![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)
 
 ## Índice
@@ -16,9 +14,9 @@
 
 ## Descripción del Proyecto
 
-¡Atención, profesores y amantes de la planificación! ¡La **Class Planner App** ha llegado para alegrar sus vidas! Esta maravillosa aplicación combina la sabiduría de un profesor experimentado con la diversión de una piñata en una fiesta infantil. 🎉📚
+¡Para todos los profesores y amantes de la planificación! ¡La **Class Planner App** ha llegado para alegrarte la vida! Esta maravillosa aplicación combina la sabiduría de un profesor experimentado con la diversión de una piñata en una fiesta infantil. 🎉📚
 
-Nuestro genial asistente virtual, basado en la API de OpenAI, creará planes de clase y presentaciones en PowerPoint siguiendo sus indicaciones. ¡Ahora sus clases serán tan memorables como un buen chiste! 😄
+Nuestro genial asistente virtual, basado en la API de OpenAI, creará planes de clase y presentaciones en PowerPoint siguiendo tus indicaciones. ¡Ahora tus clases van a ser inolvidables! 😄
 
 ## Estado del proyecto
 
@@ -49,7 +47,7 @@ Si deseas unirte a esta emocionante aventura, sigue estos pasos:
 
 ## Personas Contribuyentes
 
-Agradecemos a todos los justicieros del código que han aportado sus habilidades al proyecto. Si deseas unirte a nuestra liga de superhéroes, no dudes en hacer un fork del repositorio y colaborar.
+Todavía nadie. Si deseas unirte a nuestra liga de superhéroes, no dudes en hacer un fork del repositorio y colaborar.
 
 ## Personas Desarrolladoras del Proyecto
 
