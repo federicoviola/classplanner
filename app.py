@@ -9,7 +9,10 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 
-openai_api_key = os.environ.get("OPENAI_API_KEY")
+# CUIDADO: No pushear con la API privada escrita
+openai.api_key = "SECRET_API_KEY"
+# openai_api_key = os.environ.get("OPENAI_API_KEY")
+
 load_dotenv()
 app = Flask(__name__)
 
