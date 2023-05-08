@@ -47,7 +47,9 @@ Si deseas unirte a esta emocionante aventura, sigue estos pasos:
 
 ## Personas Contribuyentes
 
-Todavía nadie. Si deseas unirte a nuestra liga de superhéroes, no dudes en hacer un fork del repositorio y colaborar.
+[Facundo Martinez](https://github.com/fx-biocoder)
+
+Si deseas unirte a nuestra liga de superhéroes, no dudes en hacer un fork del repositorio y colaborar.
 
 ## Personas Desarrolladoras del Proyecto
 
