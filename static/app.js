@@ -1,16 +1,7 @@
-// Muestra el indicador de carga
-function showLoadingIndicator() {
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.display = 'block';
-  }
+document.getElementById('generate-presentation-btn').addEventListener('click', function(event) {
+  event.preventDefault();
+  document.getElementById('loading-indicator').classList.remove('d-none');
 
-  // Oculta el indicador de carga
-  function hideLoadingIndicator() {
-    const loadingIndicator = document.getElementById('loading-indicator');
-    loadingIndicator.style.display = 'none';
-  }
-
-  // Captura el evento de envío del formulario
   const form = document.querySelector('form');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -37,8 +28,6 @@ function showLoadingIndicator() {
     })
       .then((response) => {
         // Oculta el indicador de carga cuando se recibe la respuesta
-        hideLoadingIndicator();
-
         if (response.ok) {
           return response.blob();
         } else {
@@ -60,7 +49,6 @@ function showLoadingIndicator() {
         hideLoadingIndicator();
         console.error(error);
       });
-
-    // Muestra el indicador de carga antes de iniciar la llamada AJAX
-    showLoadingIndicator();
   });
+  
+});

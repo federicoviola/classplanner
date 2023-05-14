@@ -1,0 +1,22 @@
+.hero-section {
+    height: 100vh;
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+
+ .hero-section .box {
+    background-color: #000;
+    color: #fff;
+    opacity: 0.7;
+    width: 100%;
+    padding: 1vw;
+}
+
+.app-section {
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+
+  
